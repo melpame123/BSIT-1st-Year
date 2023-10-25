@@ -1,0 +1,5 @@
+n = 0
+n2 = 10
+while n<=n2:
+  print(n)
+  n=n+
