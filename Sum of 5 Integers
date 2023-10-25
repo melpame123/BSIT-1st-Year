@@ -1,0 +1,7 @@
+i = 0
+sum = 0
+while i < 5:
+  num = int(input('Enter number: '))
+  sum = sum + num
+  print('Total: ', sum)
+  i += 1
