@@ -1,0 +1,7 @@
+print("Please share the information asked for:\n")
+
+name = input ("Enter Name: ")
+age = int(input ("Enter Age: "))
+
+print (name + str(age))
+
