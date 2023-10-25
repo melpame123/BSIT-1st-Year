@@ -1,0 +1,23 @@
+name=input("Student Name: ")
+
+print("\nPlease input " + name + "'s grades \n")
+
+math=float(input("Math Grade: "))
+sci=float(input("Science Grade: "))
+arts=float(input("Arts Grade: "))
+eng=float(input("English Grade: "))
+prog=float(input("Programming 1 Grade: "))
+
+sum=(math+sci+arts+eng+prog)
+avg=sum/5
+
+print(name + "'s average is " + str(avg))
+
+if avg >=85:
+  print("With Highest Honor")
+elif avg >=80 and avg<=84:
+  print("With Honor")
+elif avg >=75 and avg<=79:
+  print("Above Pass")
+else:
+  print("Fail")
