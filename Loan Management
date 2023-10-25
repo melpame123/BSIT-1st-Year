@@ -1,0 +1,166 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# Variable to track the login status
+login_successful = False
+add_loan_window = None  # Global variable to track the "Add Loan" window
+
+# Function to open the "New Client Information" window
+def open_new_client_form():
+    global login_successful, add_loan_window
+    login_successful = True  # Set the login status to successful
+
+    # Destroy the login window
+    window.destroy()
+
+    # Create a new window for the new client information form
+    new_client_window = tk.Tk()
+    new_client_window.title("Loan Management System")
+    new_client_window.geometry('720x480')
+    new_client_window.configure(bg='pink')
+
+    frame = tk.Frame(new_client_window, bg='pink')
+
+    TT = tk.Label(frame, text="New Client Information", bg='white', font=("Arial", 20))
+    TT.grid(row=0, column=2, pady=30)
+
+    ID = tk.Label(frame, text="Loan ID", bg='pink', font=("Arial", 12))
+    ID.grid(row=1, column=1, sticky="e")
+    ID = tk.Entry(frame)
+    ID.grid(row=1, column=2)
+
+    IN = tk.Label(frame, text="Annual Income", bg='pink', font=("Arial", 12))
+    IN.grid(row=2, column=1, sticky="e")
+    IN = tk.Entry(frame)
+    IN.grid(row=2, column=2)
+
+    FN = tk.Label(frame, text="First Name", bg='pink', font=("Arial", 12))
+    FN.grid(row=3, column=1, sticky="e")
+    FN = tk.Entry(frame)
+    FN.grid(row=3, column=2)
+
+    MN = tk.Label(frame, text="Middle Name", bg='pink', font=("Arial", 12))
+    MN.grid(row=4, column=1, sticky="e")
+    MN = tk.Entry(frame)
+    MN.grid(row=4, column=2)
+
+    LN = tk.Label(frame, text="Last Name", bg='pink', font=("Arial", 12))
+    LN.grid(row=5, column=1, sticky="e")
+    LN = tk.Entry(frame)
+    LN.grid(row=5, column=2)
+
+    MOB = tk.Label(frame, text="Mobile No.", bg='pink', font=("Arial", 12))
+    MOB.grid(row=6, column=1, sticky="e")
+    MOB = tk.Entry(frame)
+    MOB.grid(row=6, column=2)
+
+    ADD = tk.Label(frame, text="Address", bg='pink', font=("Arial", 12))
+    ADD.grid(row=7, column=1, sticky="e")
+    ADD = tk.Entry(frame)
+    ADD.grid(row=7, column=2)
+
+    OC = tk.Label(frame, text="Occupation", bg='pink', font=("Arial", 12))
+    OC.grid(row=8, column=1, sticky="e")
+    OC = tk.Entry(frame)
+    OC.grid(row=8, column=2)
+
+    next_button = tk.Button(frame, text="Continue", bg='#cdedce', font=("Arial", 12), command=lambda: open_add_loan_window(new_client_window))
+    next_button.grid(row=9, column=2, pady=30)
+
+    frame.pack()
+    new_client_window.mainloop()
+
+# Function to open the "Add Loan" window
+def open_add_loan_window(new_client_window):
+
+    new_client_window.destroy()
+
+    global login_successful, add_loan_window
+    if login_successful:
+        if add_loan_window is not None:
+            # Close the previous "Add Loan" window
+            add_loan_window.destroy()
+
+        # Create a new window for adding a loan
+        add_loan_window = tk.Tk()
+        add_loan_window.title("Add Loan")
+        add_loan_window.geometry("720x480")
+        custom_font = ('Arial', 13)
+        add_loan_window.configure(bg='pink')
+
+        loan_ID_label = tk.Label(add_loan_window, text="Loan ID: ", bg='pink', pady=10, font=custom_font)
+        lender_name_label = tk.Label(add_loan_window, text="Customer Name:", bg='pink', pady=10, font=custom_font)
+        loan_amount_label = tk.Label(add_loan_window, text="Loan Amount:", bg='pink', pady=10, font=custom_font)
+
+        loan_ID_entry = tk.Entry(add_loan_window, font=custom_font)
+        lender_name_entry = tk.Entry(add_loan_window, font=custom_font)
+        loan_amount_entry = tk.Entry(add_loan_window, font=custom_font)
+
+        loan_ID_entry.configure(bg='#cdedce')
+        lender_name_entry.configure(bg='#cdedce')
+        loan_amount_entry.configure(bg='#cdedce')
+
+        def add_lender():
+            loan_ID = loan_ID_entry.get()
+            lender_name = lender_name_entry.get()
+            loan_amount = loan_amount_entry.get()
+            loan_status = "Working"
+
+            loans_list.insert(tk.END, f"\nCustomer Information:\nLoan Id: {loan_ID} | Lender name: {lender_name} | Loan amount: ${loan_amount} | Status: {loan_status}")
+
+        add_lender_button = tk.Button(add_loan_window, text="Add Loan", command=add_lender, font=custom_font)
+
+        loans_list = tk.Listbox(add_loan_window, height=30, width=150, font=custom_font)
+
+        loan_ID_label.pack()
+        loan_ID_entry.pack()
+        lender_name_label.pack()
+        lender_name_entry.pack()
+        loan_amount_label.pack()
+        loan_amount_entry.pack()
+        add_lender_button.pack(pady=10)
+        loans_list.pack()
+        add_lender_button.configure(bg='#cdedce')
+        loans_list.configure(bg='#cdedce')
+
+        add_loan_window.mainloop()
+
+def validate_login():
+    entered_username = username_entry.get()
+    entered_password = password_entry.get()
+
+    valid_username = "username"
+    valid_password = "password"
+
+    if entered_username == valid_username and entered_password == valid_password:
+        message = "Login Successful"
+        messagebox.showinfo("Login Result", message)
+        open_new_client_form()
+    else:
+        message = "Login Failed. Invalid username or password."
+
+
+
+# =======================
+
+window = tk.Tk()
+window.title('Login')
+window.geometry("500x400")
+window.configure(bg='pink')
+
+custom_font = ("Arial", 13)
+
+center_frame = tk.Frame(window, bg='pink')
+center_frame.pack(expand=True)
+
+tk.Label(center_frame, text="Username:", bg='pink', font=custom_font).grid(row=1, column=1, sticky="e")
+username_entry = tk.Entry(center_frame, bg='#cdedce')
+username_entry.grid(row=1, column=2)
+
+tk.Label(center_frame, text="Password:", bg='pink', font=custom_font).grid(row=2, column=1, sticky="e", pady=5)
+password_entry = tk.Entry(center_frame, show='*', bg='#cdedce')
+password_entry.grid(row=2, column=2)
+
+tk.Button(center_frame, text="Login", font=custom_font, bg='#cdedce', command=validate_login).grid(row=3, column=1, columnspan=2, pady=15)
+
+window.mainloop()
