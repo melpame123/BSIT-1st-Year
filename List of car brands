@@ -1,0 +1,5 @@
+carBrands = ['Toyota', 'Mazda', 'Lambo', 'Suzuki', 'Tesla']
+carBrands.insert(2,'Jeep')
+del carBrands[5]
+
+print(carBrands)
