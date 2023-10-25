@@ -1,0 +1,6 @@
+n = int(input('Enter A Number: '))
+i = 1
+while i <= n:
+  print('Hi’)
+  print('count: ', i)
+  i += 1
