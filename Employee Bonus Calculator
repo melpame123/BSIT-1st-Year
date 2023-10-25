@@ -1,0 +1,24 @@
+print("Please input the following employee information")
+
+fname=input("First Name: ")
+lname=input("Last Name: ")
+sal=float(input("Salary: "))
+rate=int(input("Rating: "))
+
+if rate == 1:
+  percentage = 10
+elif rate == 2:
+  percentage = 6
+elif rate == 3:
+  percentage = 3
+elif rate == 4:
+  percentage = 0
+else:
+  exit()
+
+bonus = (percentage / 100) * sal
+
+print("Name: ", fname, lname)
+print("Salary: ", sal)
+print("Rating: ", rate)
+print("Bonus: ", bonus)
